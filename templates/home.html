@@ -1,0 +1,12 @@
+{%extends "layout.html" %}
+
+{%block contents %}
+
+    <h2>Contents : </h2>
+    <ul>
+        <li>Home</li>
+        <li><a href="{{url_for('signup')}}" >SignUp</a></li>
+        <li><a href="{{url_for('login')}}" >LogIn</a></li>
+    </ul>
+
+{%endblock contents %}

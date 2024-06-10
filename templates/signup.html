@@ -1,0 +1,82 @@
+{%extends "layout.html" %}
+
+{% block contents %}
+<form action="" method="post">
+    {{ form.hidden_tag()}}
+    <div>
+        {{ form.username.label }} 
+        {{ form.username}} 
+
+        {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                <div> {{ error }} </div>
+            {%endfor %}
+        {%endif %}
+    </div>
+    <br>
+    <div>
+        {{ form.email.label }} 
+        {{ form.email}}
+
+        {% if form.email.errors %}
+        {% for error in form.email.errors %}
+        <div> {{ error }} </div>
+        {%endfor %}
+        {%endif %}
+
+    </div>
+    <br>
+    <div>
+        {{ form.gender.label }} 
+        {{ form.gender}}
+        
+        {% if form.gender.errors %}
+        {% for error in form.gender.errors %}
+        <div> {{ error }} </div>
+        {%endfor %}
+        {%endif %}
+    </div>
+    <br>
+    <div>
+        {{ form.DOB.label }} 
+        {{ form.DOB}}
+        
+        {% if form.DOB.errors %}
+        {% for error in form.DOB.errors %}
+        <div> {{ error }} </div>
+        {%endfor %}
+        {%endif %}
+    </div>
+    <br>
+    <div>
+        {{ form.password.label }} 
+        {{ form.password}}
+
+        {% if form.password.errors %}
+        {% for error in form.password.errors %}
+        <div> {{ error }} </div>
+        {%endfor %}
+        {%endif %}
+    </div>
+    <br>
+    <div>
+        {{ form.confirmPassword.label }} 
+        {{ form.confirmPassword}}
+
+        {% if form.confirmPassword.errors %}
+            {% for error in form.confirmPassword.errors %}
+                <div> {{ error }} </div>
+            {%endfor %}
+        {%endif %}
+    </div>
+    <br>
+    <div>
+        {{ form.submit_button.label }} 
+        {{ form.submit_button}}
+    </div>
+    <br>
+</form>
+
+<h3>Already Registered ? Return to <a href="{{url_for('login')}}" target="_blank">LogIn</a> Page</h3>
+<h3>Already Registered ? Want to return to home page <a href="{{url_for('home')}}" target="_blank">Home</a></h3>
+{%endblock %}
