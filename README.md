@@ -14,3 +14,9 @@
     2. Password 
     3. remember me box 
     4. SubmitButton
+
+
+## Errors in the SignUp form USing WTForms 
+![Screenshot 2024-06-10 094751](https://github.com/Pavansyamala/FlaskEndtoEndLearning/assets/123885609/fe41f9ef-cc40-47c7-b3dc-6bdddc4f4a0e)
+
+<img width="316" alt="image" src="https://github.com/Pavansyamala/FlaskEndtoEndLearning/assets/123885609/e4a5787e-7d24-426c-ac30-366afe6983dc">
