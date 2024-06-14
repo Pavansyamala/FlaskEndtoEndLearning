@@ -24,7 +24,7 @@ def signup():
         db.cursor.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)" , (username, email, password))
         db.conn.commit()
         db.cursor.close()
-        db.con.close()
+        db.conn.close()
         return redirect(url_for('home')) 
     return  render_template('signup.html' , title = 'Signup' , form = form)
 
@@ -39,7 +39,7 @@ def login():
         if len(db.cursor.fetchall()) != 0 :
             flash(' Login Succesfull! ')
             db.cursor.close()
-            db.con.close()
+            db.conn.close()
             return redirect(url_for('home'))
         else :
             flash(' Login Failed! ')
@@ -47,4 +47,4 @@ def login():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host = '0.0.0.0' , port = 5000 , debug=True)
