@@ -1,6 +1,6 @@
 from flask import Flask , render_template , url_for , redirect , flash
 from forms import SignupForm , LoginForm
-from database_connecton import Connection
+from database_connecton import connection
 
 app = Flask(__name__) 
 app.config["SECRET_KEY"] = "9347649447"
@@ -14,17 +14,14 @@ def home():
 @app.route('/signup' , methods = [ 'GET' , 'POST'])
 def signup():
     form = SignupForm()
-    db = Connection()
+    db = connection()
     if form.validate_on_submit():
         username = form.username.data
         email = form.email.data
         password = form.password.data
         flash(f"Signup successful dear {form.username.data}")
-        
-        db.cursor.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)" , (username, email, password))
-        db.conn.commit()
-        db.cursor.close()
-        db.conn.close()
+        document = {"username":username,"email":email,"password":password}
+        db.coll.insert_one(document)
         return redirect(url_for('home')) 
     return  render_template('signup.html' , title = 'Signup' , form = form)
 
@@ -34,15 +31,17 @@ def login():
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data 
-        db = Connection()
-        db.cursor.execute("SELECT * FROM users WHERE email LIKE %s AND password LIKE %s" , (email , password))
-        if len(db.cursor.fetchall()) != 0 :
-            flash(' Login Succesfull! ')
-            db.cursor.close()
-            db.conn.close()
+        db = connection()
+        record = db.coll.find({"$and":[{"email":email} , {"password" : password}]})
+        count = 0 
+        for i in record :
+            count += 1 
+        if count != 0 :
+            flash('Login Successful')
             return redirect(url_for('home'))
         else :
-            flash(' Login Failed! ')
+            flash('Login Failed')
+            return render_template('login.html' , title = 'Login' , form = form)
     return render_template('login.html' , title = 'Login' , form = form)
 
 
